@@ -1,0 +1,42 @@
+<header class="header">
+  <div class="container">
+    <div class="logo-container">
+      <a routerLink="/" class="logo">Tech Talk</a>
+      <span class="slogan">Soluções para o dia-a-dia</span>
+    </div>
+    <div class="contact-email">
+      <a href="mailto:danielsteinbruch&#64;gmail.com">danielsteinbruch&#64;gmail.com</a>
+    </div>
+    <nav class="main-nav">
+      <ul>
+        <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Início</a></li>
+        <li><a routerLink="/blog" routerLinkActive="active">Blog</a></li>
+        <li><a routerLink="/plans-pricing" routerLinkActive="active">Planos e preços</a></li>
+        <li><a routerLink="/shop" routerLinkActive="active">Loja</a></li>
+        <li><a routerLink="/event-list" routerLinkActive="active">Eventos</a></li>
+        <li><a routerLink="/members" routerLinkActive="active">Members</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle">Mais</a>
+          <div class="dropdown-content">
+            <!-- Adicionar itens de dropdown adicionais aqui se necessário -->
+          </div>
+        </li>
+      </ul>
+    </nav>
+    <button class="mobile-menu-btn" (click)="toggleMobileMenu()" aria-label="Menu" title="Abrir menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+<div class="mobile-menu" [class.active]="isMobileMenuOpen">
+  <ul>
+    <li><a routerLink="/" (click)="closeMobileMenu()">Início</a></li>
+    <li><a routerLink="/blog" (click)="closeMobileMenu()">Blog</a></li>
+    <li><a routerLink="/plans-pricing" (click)="closeMobileMenu()">Planos e preços</a></li>
+    <li><a routerLink="/shop" (click)="closeMobileMenu()">Loja</a></li>
+    <li><a routerLink="/event-list" (click)="closeMobileMenu()">Eventos</a></li>
+    <li><a routerLink="/members" (click)="closeMobileMenu()">Members</a></li>
+  </ul>
+</div>
