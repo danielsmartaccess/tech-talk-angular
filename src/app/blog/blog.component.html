@@ -1,1 +1,13 @@
-<p>blog works!</p>
+<div class="blog-container">
+  <h1 class="section-title">Artigos</h1>
+  <div class="card-grid">
+    <div class="card" *ngFor="let post of posts">
+      <img [src]="post.image" [alt]="post.title" />
+      <div class="card-content">
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.excerpt }}</p>
+        <a [href]="post.url" class="cta-button" target="_blank">Ler mais</a>
+      </div>
+    </div>
+  </div>
+</div>

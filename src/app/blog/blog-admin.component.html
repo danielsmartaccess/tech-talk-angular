@@ -1,0 +1,22 @@
+<div class="admin-container">
+  <h1>Gerenciar Blog</h1>
+  <form [formGroup]="postForm" (ngSubmit)="addPost()">
+    <input formControlName="title" placeholder="Título" />
+    <input formControlName="excerpt" placeholder="Resumo" />
+    <input formControlName="image" placeholder="URL da imagem" />
+    <input formControlName="url" placeholder="Link do artigo" />
+    <button class="cta-button" type="submit" [disabled]="postForm.invalid">Adicionar</button>
+  </form>
+
+  <div class="card-grid">
+    <div class="card" *ngFor="let post of posts; index as i">
+      <img [src]="post.image" [alt]="post.title" />
+      <div class="card-content">
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.excerpt }}</p>
+        <a [href]="post.url" target="_blank">Abrir</a>
+        <button (click)="deletePost(i)">Excluir</button>
+      </div>
+    </div>
+  </div>
+</div>
