@@ -2,7 +2,7 @@
   <div class="container">
     <div class="logo-container">
       <a routerLink="/" class="logo" aria-label="Início">
-        <img src="/assets/images/Just%20Go%203.jpg" alt="Logo Conecta Melhor Idade" class="logo-img" />
+        <img src="/assets/images/go.avif" alt="Logo Tech Talk" class="logo-img" />
       </a>
       <span class="slogan">Tech Talk</span>
       <span class="slogan">Soluções para o dia-a-dia</span>
@@ -15,15 +15,7 @@
         <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Início</a></li>
         <li><a routerLink="/blog" routerLinkActive="active">Blog</a></li>
         <li><a routerLink="/plans-pricing" routerLinkActive="active">Planos e preços</a></li>
-        <li><a routerLink="/shop" routerLinkActive="active">Loja</a></li>
         <li><a routerLink="/event-list" routerLinkActive="active">Eventos</a></li>
-        <li><a routerLink="/members" routerLinkActive="active">Members</a></li>
-        <li class="dropdown">
-          <a class="dropdown-toggle">Mais</a>
-          <div class="dropdown-content">
-            <!-- Adicionar itens de dropdown adicionais aqui se necessário -->
-          </div>
-        </li>
       </ul>
     </nav>
     <button class="mobile-menu-btn" (click)="toggleMobileMenu()" aria-label="Menu" title="Abrir menu">
@@ -38,8 +30,6 @@
     <li><a routerLink="/" (click)="closeMobileMenu()">Início</a></li>
     <li><a routerLink="/blog" (click)="closeMobileMenu()">Blog</a></li>
     <li><a routerLink="/plans-pricing" (click)="closeMobileMenu()">Planos e preços</a></li>
-    <li><a routerLink="/shop" (click)="closeMobileMenu()">Loja</a></li>
     <li><a routerLink="/event-list" (click)="closeMobileMenu()">Eventos</a></li>
-    <li><a routerLink="/members" (click)="closeMobileMenu()">Members</a></li>
   </ul>
 </div>

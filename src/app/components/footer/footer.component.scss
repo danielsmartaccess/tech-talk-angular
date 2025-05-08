@@ -1,51 +1,227 @@
-/* Estilos para o footer similar ao gotechtalk.com.br */
+/* Estilos para o footer com design premium */
 
 .footer {
-  background-color: #333;
+  position: relative;
+  background: linear-gradient(135deg, #1a2533, #0f1721);
   color: #fff;
-  padding: 30px 0;
+  padding: 70px 0 30px;
+  margin-top: 40px;
+  overflow: hidden;
+  border-top: 3px solid #3498db;
 }
 
-.footer-content {
+.footer-wave {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  color: #fff;
+  overflow: hidden;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.footer-brand {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.copyright {
-  font-size: 0.9rem;
-  color: #ccc;
+.footer-logo {
+  display: inline-block;
+}
+
+.footer-logo-img {
+  height: 60px;
+  width: auto;
+}
+
+.footer-tagline {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.footer-description {
+  color: #e6e6e6;
+  font-size: 1rem;
+  line-height: 1.6;
+  font-weight: 400;
 }
 
 .social-links {
   display: flex;
   gap: 15px;
+  margin-top: 10px;
 }
 
-.social-links a {
+.social-link {
   color: #fff;
   font-size: 1.2rem;
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
   transition: all 0.3s ease;
 }
 
-.social-links a:hover {
-  background-color: #3498db;
-  transform: translateY(-3px);
+.social-link:hover {
+  background: linear-gradient(135deg, #3498db, #2ecc71);
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.footer-nav h4,
+.footer-contact h4 {
+  position: relative;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.footer-nav h4:after,
+.footer-contact h4:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+  border-radius: 3px;
+}
+
+.footer-nav ul,
+.footer-contact ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-nav li,
+.footer-contact li {
+  margin-bottom: 12px;
+}
+
+.footer-nav a,
+.footer-contact a {
+  color: #e6e6e6;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+  position: relative;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.footer-nav a:hover,
+.footer-contact a:hover {
+  color: #fff;
+  transform: translateX(5px);
+}
+
+.footer-contact li {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 5px 0;
+  margin-bottom: 15px;
+}
+
+.footer-contact i {
+  color: #3498db;
+  font-size: 1.2rem;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 8px;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.copyright {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+}
+
+.created-with {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #7f8c8d;
+}
+
+.tech-icon {
+  color: #3498db;
+}
+
+.heart-icon {
+  color: #e74c3c;
+  animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
 }
 
 /* Responsividade */
 @media (max-width: 767px) {
-  .footer-content {
-    flex-direction: column;
+  .footer-grid {
+    grid-template-columns: 1fr;
     text-align: center;
-    gap: 20px;
+  }
+  
+  .footer-brand {
+    align-items: center;
+  }
+  
+  .social-links {
+    justify-content: center;
+  }
+  
+  .footer-nav h4:after,
+  .footer-contact h4:after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .footer-contact li {
+    justify-content: center;
   }
 }

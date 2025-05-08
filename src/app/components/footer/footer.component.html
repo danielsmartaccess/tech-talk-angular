@@ -1,20 +1,67 @@
-<footer class="footer">
+<footer class="footer" itemscope itemtype="https://schema.org/Organization">
+  <div class="footer-wave">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none">
+      <path d="M0,50 C300,0 400,100 800,30 C1200,0 1200,100 1440,20 L1440,100 L0,100 Z" fill="currentColor"></path>
+    </svg>
+  </div>
+  
   <div class="container">
-    <div class="footer-content">
-      <div class="copyright">
-        &copy;2024 por Agile Tech Talk. Orgulhosamente criado com Angular.
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="footer-logo" itemprop="url">
+          <img src="/assets/images/go.avif" alt="Go Tech Talk Logo" class="footer-logo-img" itemprop="logo" />
+        </a>
+        <h3 class="footer-tagline" itemprop="slogan">Tecnologia de um jeito Fácil</h3>
+        <p class="footer-description" itemprop="description">Ajudamos pessoas da melhor idade a explorar o mundo digital com confiança e simplicidade.</p>
+        
+        <div class="social-links">
+          <a href="#" aria-label="Facebook" title="Facebook" class="social-link">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" aria-label="Instagram" title="Instagram" class="social-link">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="#" aria-label="Twitter" title="Twitter" class="social-link">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
       </div>
-      <div class="social-links">
-        <!-- Ícones de redes sociais podem ser adicionados aqui -->
-        <a href="#" aria-label="Facebook" title="Facebook">
-          <i class="fa fa-facebook"></i>
-        </a>
-        <a href="#" aria-label="Instagram" title="Instagram">
-          <i class="fa fa-instagram"></i>
-        </a>
-        <a href="#" aria-label="Twitter" title="Twitter">
-          <i class="fa fa-twitter"></i>
-        </a>
+      
+      <div class="footer-nav">
+        <h4>Navegação</h4>
+        <ul>
+          <li><a routerLink="/">Início</a></li>
+          <li><a routerLink="/blog">Blog</a></li>
+          <li><a routerLink="/plans-pricing">Planos e Preços</a></li>
+          <li><a routerLink="/event-list">Eventos</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-contact">
+        <h4>Entre em Contato</h4>
+        <ul>
+          <li>
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:danielsteinbruch&#64;gmail.com">danielsteinbruch&#64;gmail.com</a>
+          </li>
+          <li>
+            <i class="fab fa-whatsapp"></i>
+            <a href="https://wa.me/5551981418383">+55 (51) 98141-8383</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <div class="copyright">
+        &copy; 2024 Go Tech Talk. Todos os direitos reservados.
+      </div>
+      
+      <div class="created-with">
+        <span>Criado com</span>
+        <i class="fab fa-angular tech-icon"></i>
+        <span>e</span>
+        <i class="fas fa-heart heart-icon"></i>
       </div>
     </div>
   </div>
