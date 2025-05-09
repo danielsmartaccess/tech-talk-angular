@@ -1,1 +1,244 @@
-<p>events works!</p>
+<div class="events-container">
+  <div class="events-header">
+    <h1 class="section-title">Eventos Go Tech Talk</h1>
+    <p class="section-subtitle">Aprenda, conecte-se e evolua com nossa programação exclusiva para a melhor idade</p>
+    
+    <div class="events-actions">
+      <div class="search-box">
+        <input 
+          type="text" 
+          [(ngModel)]="searchTerm" 
+          (input)="searchEvents()" 
+          placeholder="Buscar eventos..."
+          class="search-input"
+        />
+        <button *ngIf="searchTerm" (click)="clearSearch()" class="clear-search">
+          <i class="fas fa-times"></i>
+        </button>
+        <i class="fas fa-search search-icon"></i>
+      </div>
+      
+      <button (click)="openAddForm()" class="add-event-btn">
+        <i class="fas fa-plus"></i> Novo Evento
+      </button>
+    </div>
+  </div>
+  
+  <!-- Lista de Eventos -->
+  <div class="events-list">
+    <div *ngIf="filteredEvents.length === 0" class="no-events">
+      <i class="fas fa-calendar-times"></i>
+      <p>Nenhum evento encontrado. Tente ajustar sua busca ou volte mais tarde.</p>
+    </div>
+    
+    <div *ngFor="let event of filteredEvents" class="event-card">
+      <div class="event-image" [style.backgroundImage]="'url(' + (event.image || '/assets/images/event-placeholder.jpg') + ')'">
+        <div class="event-date">
+          <span>{{ event.date | date:'dd' }}</span>
+          <span>{{ event.date | date:'MMM' | uppercase }}</span>
+        </div>
+      </div>
+      
+      <div class="event-content">
+        <h3 class="event-title">{{ event.title }}</h3>
+        
+        <div class="event-details">
+          <div class="event-detail">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>{{ event.location }}</span>
+          </div>
+          <div class="event-detail">
+            <i class="fas fa-clock"></i>
+            <span>{{ formatDate(event.date) }}</span>
+          </div>
+          <div class="event-detail">
+            <i class="fas fa-user-tie"></i>
+            <span>{{ event.instructor }}</span>
+          </div>
+          <div class="event-detail">
+            <i class="fas fa-users"></i>
+            <span>{{ event.participants?.length || 0 }} / {{ event.capacity }} participantes</span>
+          </div>
+        </div>
+        
+        <p class="event-description">{{ event.description }}</p>
+        
+        <div class="event-footer">
+          <div class="event-price">
+            <span *ngIf="event.price > 0">R$ {{ event.price.toFixed(2) }}</span>
+            <span *ngIf="event.price === 0" class="free-badge">GRATUITO</span>
+          </div>
+          
+          <div class="event-actions">
+            <button (click)="openEditForm(event)" class="btn-edit">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button (click)="deleteEvent(event.id)" class="btn-delete">
+              <i class="fas fa-trash"></i>
+            </button>
+            
+            <button *ngIf="!isUserRegistered(event) && !isEventFull(event)" 
+                    (click)="registerForEvent(event)" 
+                    class="btn-register">
+              <i class="fas fa-check-circle"></i> Inscrever-se
+            </button>
+            
+            <button *ngIf="isUserRegistered(event)" 
+                    (click)="unregisterFromEvent(event)" 
+                    class="btn-unregister">
+              <i class="fas fa-times-circle"></i> Cancelar inscrição
+            </button>
+            
+            <button *ngIf="!isUserRegistered(event) && isEventFull(event)" 
+                    class="btn-full" disabled>
+              <i class="fas fa-ban"></i> Vagas esgotadas
+            </button>
+          </div>
+        </div>
+        
+        <div *ngIf="isUserRegistered(event)" class="registered-badge">
+          <i class="fas fa-check-circle"></i> Você está inscrito
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Formulário de Evento (Modal) -->
+  <div class="event-form-modal" *ngIf="showForm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>{{ isEditing ? 'Editar Evento' : 'Novo Evento' }}</h2>
+        <button (click)="closeForm()" class="close-btn">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <form [formGroup]="eventForm" (ngSubmit)="saveEvent()">
+        <div class="form-group">
+          <label for="title">Título do Evento*</label>
+          <input 
+            type="text" 
+            id="title" 
+            formControlName="title" 
+            placeholder="Digite o título do evento"
+            [ngClass]="{'invalid': eventForm.get('title')?.invalid && eventForm.get('title')?.touched}"
+          />          <div *ngIf="eventForm.get('title')?.invalid && eventForm.get('title')?.touched" class="error-message">
+            <span *ngIf="eventForm.get('title')?.errors?.['required']">Título é obrigatório.</span>
+            <span *ngIf="eventForm.get('title')?.errors?.['minlength']">O título deve ter pelo menos 5 caracteres.</span>
+            <span *ngIf="eventForm.get('title')?.errors?.['maxlength']">O título não pode ultrapassar 100 caracteres.</span>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="description">Descrição*</label>
+          <textarea 
+            id="description" 
+            formControlName="description" 
+            rows="4" 
+            placeholder="Descreva o evento detalhadamente"
+            [ngClass]="{'invalid': eventForm.get('description')?.invalid && eventForm.get('description')?.touched}"
+          ></textarea>          <div *ngIf="eventForm.get('description')?.invalid && eventForm.get('description')?.touched" class="error-message">
+            <span *ngIf="eventForm.get('description')?.errors?.['required']">Descrição é obrigatória.</span>
+            <span *ngIf="eventForm.get('description')?.errors?.['minlength']">A descrição deve ter pelo menos 20 caracteres.</span>
+            <span *ngIf="eventForm.get('description')?.errors?.['maxlength']">A descrição não pode ultrapassar 500 caracteres.</span>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="date">Data*</label>
+            <input 
+              type="date" 
+              id="date" 
+              formControlName="date"
+              [ngClass]="{'invalid': eventForm.get('date')?.invalid && eventForm.get('date')?.touched}"
+            />            <div *ngIf="eventForm.get('date')?.invalid && eventForm.get('date')?.touched" class="error-message">
+              <span *ngIf="eventForm.get('date')?.errors?.['required']">Data é obrigatória.</span>
+              <span *ngIf="eventForm.get('date')?.errors?.['pastDate']">A data deve ser no futuro.</span>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="location">Local*</label>
+            <input 
+              type="text" 
+              id="location" 
+              formControlName="location" 
+              placeholder="Local do evento"
+              [ngClass]="{'invalid': eventForm.get('location')?.invalid && eventForm.get('location')?.touched}"
+            />            <div *ngIf="eventForm.get('location')?.invalid && eventForm.get('location')?.touched" class="error-message">
+              <span *ngIf="eventForm.get('location')?.errors?.['required']">Local é obrigatório.</span>
+              <span *ngIf="eventForm.get('location')?.errors?.['minlength']">O local deve ter pelo menos 5 caracteres.</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="capacity">Capacidade*</label>
+            <input 
+              type="number" 
+              id="capacity" 
+              formControlName="capacity" 
+              min="1"
+              [ngClass]="{'invalid': eventForm.get('capacity')?.invalid && eventForm.get('capacity')?.touched}"
+            />            <div *ngIf="eventForm.get('capacity')?.invalid && eventForm.get('capacity')?.touched" class="error-message">
+              <span *ngIf="eventForm.get('capacity')?.errors?.['required']">Capacidade é obrigatória.</span>
+              <span *ngIf="eventForm.get('capacity')?.errors?.['min']">Capacidade deve ser pelo menos 1.</span>
+              <span *ngIf="eventForm.get('capacity')?.errors?.['max']">Capacidade não pode exceder 1000.</span>
+              <span *ngIf="eventForm.get('capacity')?.errors?.['pattern']">Capacidade deve ser um número inteiro.</span>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="price">Preço (R$)*</label>
+            <input 
+              type="number" 
+              id="price" 
+              formControlName="price" 
+              min="0" 
+              step="0.01"
+              [ngClass]="{'invalid': eventForm.get('price')?.invalid && eventForm.get('price')?.touched}"
+            />            <div *ngIf="eventForm.get('price')?.invalid && eventForm.get('price')?.touched" class="error-message">
+              <span *ngIf="eventForm.get('price')?.errors?.['required']">Preço é obrigatório.</span>
+              <span *ngIf="eventForm.get('price')?.errors?.['min']">Preço não pode ser negativo.</span>
+              <span *ngIf="eventForm.get('price')?.errors?.['pattern']">Formato de preço inválido (use apenas números e decimais).</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="instructor">Instrutor*</label>
+          <input 
+            type="text" 
+            id="instructor" 
+            formControlName="instructor" 
+            placeholder="Nome do instrutor"
+            [ngClass]="{'invalid': eventForm.get('instructor')?.invalid && eventForm.get('instructor')?.touched}"
+          />          <div *ngIf="eventForm.get('instructor')?.invalid && eventForm.get('instructor')?.touched" class="error-message">
+            <span *ngIf="eventForm.get('instructor')?.errors?.['required']">Instrutor é obrigatório.</span>
+            <span *ngIf="eventForm.get('instructor')?.errors?.['minlength']">Nome do instrutor deve ter pelo menos 3 caracteres.</span>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="image">URL da Imagem (opcional)</label>          <input 
+            type="text" 
+            id="image" 
+            formControlName="image" 
+            placeholder="https://exemplo.com/imagem.jpg"
+            [ngClass]="{'invalid': eventForm.get('image')?.invalid && eventForm.get('image')?.touched}"
+          />
+          <div *ngIf="eventForm.get('image')?.invalid && eventForm.get('image')?.touched" class="error-message">
+            <span *ngIf="eventForm.get('image')?.errors?.['pattern']">URL da imagem está em formato inválido.</span>
+          </div>
+        </div>
+        
+        <div class="form-actions">
+          <button type="button" (click)="closeForm()" class="btn-cancel">Cancelar</button>
+          <button type="submit" class="btn-save">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

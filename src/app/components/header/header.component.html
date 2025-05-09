@@ -15,7 +15,20 @@
         <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Início</a></li>
         <li><a routerLink="/blog" routerLinkActive="active">Blog</a></li>
         <li><a routerLink="/plans-pricing" routerLinkActive="active">Planos e preços</a></li>
-        <li><a routerLink="/event-list" routerLinkActive="active">Eventos</a></li>
+        <li *ngIf="isLoggedIn"><a routerLink="/event-list" routerLinkActive="active">Eventos</a></li>
+        <li *ngIf="isLoggedIn"><a routerLink="/members" routerLinkActive="active">Membros</a></li>
+        <li *ngIf="isAdmin"><a routerLink="/blog-admin" routerLinkActive="active">Admin Blog</a></li>
+        <li *ngIf="!isLoggedIn"><a routerLink="/login" routerLinkActive="active" class="login-btn">Login</a></li>
+        <li *ngIf="isLoggedIn" class="user-profile">
+          <a class="user-menu">
+            <i class="fas fa-user-circle"></i> {{ username }}
+          </a>
+          <div class="dropdown-menu">
+            <a (click)="logout()" class="logout-btn">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+          </div>
+        </li>
       </ul>
     </nav>
     <button class="mobile-menu-btn" (click)="toggleMobileMenu()" aria-label="Menu" title="Abrir menu">
@@ -30,6 +43,13 @@
     <li><a routerLink="/" (click)="closeMobileMenu()">Início</a></li>
     <li><a routerLink="/blog" (click)="closeMobileMenu()">Blog</a></li>
     <li><a routerLink="/plans-pricing" (click)="closeMobileMenu()">Planos e preços</a></li>
-    <li><a routerLink="/event-list" (click)="closeMobileMenu()">Eventos</a></li>
+    <li *ngIf="isLoggedIn"><a routerLink="/event-list" (click)="closeMobileMenu()">Eventos</a></li>
+    <li *ngIf="isLoggedIn"><a routerLink="/members" (click)="closeMobileMenu()">Membros</a></li>
+    <li *ngIf="isAdmin"><a routerLink="/blog-admin" (click)="closeMobileMenu()">Admin Blog</a></li>
+    <li *ngIf="!isLoggedIn"><a routerLink="/login" (click)="closeMobileMenu()" class="login-btn">Login</a></li>
+    <li *ngIf="isLoggedIn" class="mobile-user">
+      <span class="user-greeting">Olá, {{ username }}</span>
+      <a (click)="logout(); closeMobileMenu();" class="logout-btn">Logout</a>
+    </li>
   </ul>
 </div>
