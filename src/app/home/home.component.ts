@@ -12,8 +12,8 @@ import { SeoService } from '../services/seo.service';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   private seoService = inject(SeoService);
-
   ngOnInit(): void {
+    console.log('HomeComponent initialized');
     // Configura metadados SEO específicos para a página inicial
     this.seoService.updateAll({
       title: 'Go Tech Talk | Tecnologia para a Melhor Idade de forma Simples e Intuitiva',

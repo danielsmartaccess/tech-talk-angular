@@ -18,8 +18,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   private seoService = inject(SeoService);
   private schemaService = inject(SchemaService);
   private elementRef = inject(ElementRef);
-  
-  ngOnInit(): void {
+    ngOnInit(): void {
+    console.log('AppComponent initialized');
     // Configurações padrão de SEO que serão aplicadas a todas as páginas
     // (podem ser sobrescritas por componentes específicos)
     this.seoService.updateAll({

@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private router = inject(Router);
 
   ngOnInit(): void {
+    console.log('HeaderComponent initialized');
     this.authSubscription = this.authService.currentUser.subscribe((user) => {
       this.isLoggedIn = !!user;
       this.username = user?.username || null;

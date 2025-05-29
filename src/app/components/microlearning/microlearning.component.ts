@@ -44,7 +44,7 @@ export class MicrolearningComponent implements OnInit, OnDestroy {
       ],
       icon: 'fab fa-whatsapp',
       url: '/microlearning/whatsapp-seguranca',
-      imageUrl: '/assets/images/microlearning/whatsapp-seguranca.jpg',
+      imageUrl: 'assets/images/microlearning/whatsapp-seguranca.jpg',
       duration: 'PT5M',
       provider: 'Go Tech Talk'
     },
@@ -61,7 +61,7 @@ export class MicrolearningComponent implements OnInit, OnDestroy {
       ],
       icon: 'fab fa-whatsapp',
       url: '/microlearning/whatsapp-grupos',
-      imageUrl: '/assets/images/microlearning/whatsapp-grupos.jpg',
+      imageUrl: 'assets/images/microlearning/whatsapp-grupos.jpg',
       duration: 'PT5M',
       provider: 'Go Tech Talk'
     },
@@ -79,7 +79,7 @@ export class MicrolearningComponent implements OnInit, OnDestroy {
       ],
       icon: 'fas fa-robot',
       url: '/microlearning/chatgpt-introducao',
-      imageUrl: '/assets/images/microlearning/chatgpt-intro.jpg',
+      imageUrl: 'assets/images/microlearning/chatgpt-intro.jpg',
       duration: 'PT6M',
       provider: 'Go Tech Talk'
     },
@@ -96,7 +96,7 @@ export class MicrolearningComponent implements OnInit, OnDestroy {
       ],
       icon: 'fab fa-whatsapp',
       url: '/microlearning/whatsapp-videochamadas',
-      imageUrl: '/assets/images/microlearning/whatsapp-videochamadas.jpg',
+      imageUrl: 'assets/images/microlearning/whatsapp-videochamadas.jpg',
       duration: 'PT5M',
       provider: 'Go Tech Talk'
     },
@@ -113,7 +113,7 @@ export class MicrolearningComponent implements OnInit, OnDestroy {
       ],
       icon: 'fas fa-robot',
       url: '/microlearning/chatgpt-viagens',
-      imageUrl: '/assets/images/microlearning/chatgpt-viagens.jpg',
+      imageUrl: 'assets/images/microlearning/chatgpt-viagens.jpg',
       duration: 'PT7M',
       provider: 'Go Tech Talk'
     }

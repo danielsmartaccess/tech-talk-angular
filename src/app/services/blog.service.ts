@@ -12,7 +12,7 @@ export interface Post {
 
 @Injectable({ providedIn: 'root' })
 export class BlogService {
-  private readonly apiUrl = 'http://localhost:3000/posts';
+  private readonly apiUrl = 'http://localhost:3001/posts';
 
   constructor(private http: HttpClient) {}
 
