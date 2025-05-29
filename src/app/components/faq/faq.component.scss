@@ -1,0 +1,268 @@
+/* Estilos para o componente FAQ */
+
+.faq-section {
+  padding: 80px 0;
+  background-color: #f9f9f9;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.section-title {
+  color: #333;
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.section-subtitle {
+  color: #666;
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 15px;
+}
+
+.title-separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  
+  span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #3498db;
+    color: white;
+    font-size: 1.5rem;
+    position: relative;
+    
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      height: 1px;
+      background-color: #ccc;
+      width: 100px;
+    }
+    
+    &::before {
+      right: 60px;
+    }
+    
+    &::after {
+      left: 60px;
+    }
+  }
+}
+
+.section-intro {
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* Estilos para as categorias */
+.faq-categories {
+  margin-bottom: 40px;
+}
+
+.category-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+}
+
+.category-button {
+  padding: 10px 20px;
+  border-radius: 25px;
+  background-color: #f1f1f1;
+  color: #555;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background-color: #e0e0e0;
+  }
+  
+  &.active {
+    background-color: #3498db;
+    color: white;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Estilos para o conteúdo das FAQs */
+.faq-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.category-heading {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.faq-item {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.faq-question {
+  font-size: 1.2rem;
+  color: #3498db;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #eee;
+  /* Tamanho de fonte maior para melhor legibilidade para o público 55+ */
+}
+
+.faq-answer {
+  color: #555;
+  font-size: 1.1rem; /* Tamanho de fonte maior para melhor legibilidade */
+  line-height: 1.6;
+}
+
+.faq-empty {
+  text-align: center;
+  padding: 30px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  color: #888;
+}
+
+/* Estilos para a seção de contato */
+.faq-contact {
+  margin-top: 60px;
+  text-align: center;
+  background-color: #e8f4fc;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.contact-title {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.contact-text {
+  margin-bottom: 20px;
+  color: #555;
+  font-size: 1.1rem;
+}
+
+.contact-options {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.contact-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  color: white;
+  font-size: 1.1rem;
+  min-width: 150px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  &.phone {
+    background-color: #3498db;
+  }
+  
+  &.whatsapp {
+    background-color: #25D366;
+  }
+  
+  &.email {
+    background-color: #e74c3c;
+  }
+  
+  i {
+    font-size: 1.2rem;
+  }
+}
+
+/* Responsividade */
+@media screen and (max-width: 768px) {
+  .faq-section {
+    padding: 50px 0;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .section-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .contact-options {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .contact-option {
+    width: 100%;
+    max-width: 250px;
+  }
+}
+
+/* Melhorias para acessibilidade - Público 55+ */
+/* Aumentar contraste e tamanho geral de fonte */
+@media (prefers-contrast: more) {
+  .faq-question {
+    color: #0056b3; /* Azul mais escuro para maior contraste */
+  }
+  
+  .faq-answer {
+    color: #333; /* Texto mais escuro para maior contraste */
+  }
+  
+  .category-button {
+    border: 1px solid #ccc;
+    
+    &.active {
+      border-color: #0056b3;
+    }
+  }
+}

@@ -27,6 +27,8 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
+              "src/assets",
+              "src/manifest.webmanifest",
               {
                 "glob": "**/*",
                 "input": "public"
@@ -38,7 +40,8 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
             "scripts": [],
             "outputMode": "static"

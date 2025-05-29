@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+Disallow: /login
+Disallow: /blog-admin
+Disallow: /admin
+Disallow: /api/
+Disallow: /assets/private/
+
+# Permitir imagens, CSS e JavaScript para ser indexado
+Allow: /*.js$
+Allow: /*.css$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$
+
+# Restringir frequência de acesso para bots
+# Crawl-delay: 10
+
+# Sitemaps
+Sitemap: https://gotechtalks.com.br/sitemap.xml

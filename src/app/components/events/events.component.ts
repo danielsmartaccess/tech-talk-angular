@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Event, EventService } from '../../services/event.service';
 import { UserService } from '../../services/user.service';
+import { SeoService } from '../../services/seo.service';
 
 @Component({
   selector: 'app-events',
@@ -12,7 +13,7 @@ import { UserService } from '../../services/user.service';
   templateUrl: './events.component.html',
   styleUrl: './events.component.scss'
 })
-export class EventsComponent implements OnInit {
+export class EventsComponent implements OnInit, OnDestroy {
   events: Event[] = [];
   filteredEvents: Event[] = [];
   eventForm!: FormGroup;
@@ -21,6 +22,7 @@ export class EventsComponent implements OnInit {
   selectedEvent: Event | null = null;
   showForm: boolean = false;
   currentUserId: number = 1; // Simulando usuário logado
+  private seoService = inject(SeoService);
 
   constructor(
     private eventService: EventService, 
@@ -31,7 +33,70 @@ export class EventsComponent implements OnInit {
   ngOnInit(): void {
     this.loadEvents();
     this.initForm();
+    
+    // Configurar metadados SEO para a página de eventos
+    this.seoService.updateAll({
+      title: 'Eventos Go Tech Talk | Workshops e Cursos para a Melhor Idade',
+      description: 'Confira nossa agenda de eventos presenciais e online sobre tecnologia para o público 55+. Workshops de WhatsApp, segurança digital e muito mais.',
+      keywords: 'eventos tecnologia, cursos para melhor idade, workshops idosos, aulas whatsapp',
+      url: 'https://gotectalk.com.br/event-list',
+      image: 'https://gotectalk.com.br/assets/images/go.avif',
+      type: 'events'
+    });
+    
+    // Adicionar JSON-LD para a página de eventos
+    this.eventService.getEvents().subscribe(events => {
+      const eventsData = events.map(event => ({
+        "@type": "Event",
+        "name": event.title,
+        "description": event.description,
+        "startDate": event.date,
+        "location": {
+          "@type": "Place",
+          "name": event.location,
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "São Paulo"
+          }
+        },
+        "performer": {
+          "@type": "Person",
+          "name": event.instructor
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": event.price.toString(),
+          "priceCurrency": "BRL",
+          "availability": event.participants && event.capacity && 
+                         (event.participants.length >= event.capacity) ? 
+                         "https://schema.org/SoldOut" : 
+                         "https://schema.org/InStock",
+          "validFrom": new Date().toISOString().split('T')[0]
+        },
+        "organizer": {
+          "@type": "Organization",
+          "name": "Go Tech Talk",
+          "url": "https://gotectalk.com.br"
+        }
+      }));
+      
+      this.seoService.addJsonLd({
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "itemListElement": eventsData.map((event, index) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "item": event
+        }))
+      });
+    });
   }
+
+  ngOnDestroy(): void {
+    // Remove o JSON-LD dinâmico ao sair da página
+    this.seoService.removeJsonLd();
+  }
+
   /**
    * Inicializa o formulário de eventos com validações
    * @private

@@ -1,1 +1,135 @@
-<p>plans-pricing works!</p>
+<main class="plans-container">
+  <header class="pricing-header">
+    <h1 class="section-title">Planos e Preços</h1>
+    <p class="section-subtitle">Escolha o plano ideal para sua jornada de aprendizado tecnológico</p>
+  </header>
+  
+  <section class="plans-grid" aria-labelledby="plans-heading">
+    <h2 id="plans-heading" class="visually-hidden">Opções de Planos</h2>
+    
+    <div *ngFor="let plan of plans" 
+         class="plan-card" 
+         [class.recommended]="plan.recommended"
+         [id]="plan.id"
+         itemscope 
+         itemtype="https://schema.org/Offer">
+      <div class="plan-header">
+        <h3 class="plan-name" itemprop="name">{{plan.name}}</h3>
+        <div *ngIf="plan.recommended" class="recommended-badge" aria-label="Plano recomendado">Recomendado</div>
+      </div>
+      
+      <div class="plan-price">
+        <span class="price" itemprop="price" [attr.content]="plan.price">{{formatPrice(plan.price)}}</span>
+        <meta itemprop="priceCurrency" content="BRL">
+        <span class="billing-period" *ngIf="plan.price > 0">por {{plan.billingPeriod}}</span>
+      </div>
+      
+      <p class="plan-description" itemprop="description">{{plan.description}}</p>
+      
+      <ul class="features-list">
+        <li *ngFor="let feature of plan.features" class="feature-item">
+          <i class="fas fa-check-circle" aria-hidden="true"></i>
+          <span>{{feature}}</span>
+        </li>
+      </ul>
+      
+      <div class="plan-actions">
+        <a [routerLink]="['/registro', { plan: plan.id }]" 
+           class="select-plan-btn" 
+           [attr.aria-label]="'Selecionar plano ' + plan.name"
+           itemprop="url">
+          Selecionar Plano
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <section class="plan-comparison" aria-labelledby="comparison-heading">
+    <h2 id="comparison-heading" class="section-title">Comparativo de Planos</h2>
+    
+    <div class="comparison-table-container">
+      <table class="comparison-table">
+        <caption class="visually-hidden">Comparação detalhada entre planos</caption>
+        <thead>
+          <tr>
+            <th scope="col">Recursos</th>
+            <th *ngFor="let plan of plans" scope="col">{{plan.name}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Acesso a conteúdos básicos</th>
+            <td><i class="fas fa-check" aria-label="Sim" aria-hidden="true"></i><span class="visually-hidden">Sim</span></td>
+            <td><i class="fas fa-check" aria-label="Sim" aria-hidden="true"></i><span class="visually-hidden">Sim</span></td>
+            <td><i class="fas fa-check" aria-label="Sim" aria-hidden="true"></i><span class="visually-hidden">Sim</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Acesso a conteúdos avançados</th>
+            <td><i class="fas fa-times" aria-label="Não" aria-hidden="true"></i><span class="visually-hidden">Não</span></td>
+            <td><i class="fas fa-check" aria-label="Sim" aria-hidden="true"></i><span class="visually-hidden">Sim</span></td>
+            <td><i class="fas fa-check" aria-label="Sim" aria-hidden="true"></i><span class="visually-hidden">Sim</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Participação em eventos</th>
+            <td>1 por mês</td>
+            <td>Ilimitado</td>
+            <td>Ilimitado + VIP</td>
+          </tr>
+          <tr>
+            <th scope="row">Suporte</th>
+            <td>E-mail</td>
+            <td>Prioritário</td>
+            <td>24/7</td>
+          </tr>
+          <tr>
+            <th scope="row">Consultoria individual</th>
+            <td><i class="fas fa-times" aria-label="Não" aria-hidden="true"></i><span class="visually-hidden">Não</span></td>
+            <td><i class="fas fa-times" aria-label="Não" aria-hidden="true"></i><span class="visually-hidden">Não</span></td>
+            <td>1h por mês</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  
+  <section class="faq-section" aria-labelledby="faq-heading">
+    <h2 id="faq-heading" class="section-title">Perguntas Frequentes</h2>
+    
+    <div class="faq-container" itemscope itemtype="https://schema.org/FAQPage">
+      <div *ngFor="let faq of frequentlyAskedQuestions; let i = index" 
+           class="faq-item" 
+           itemscope 
+           itemprop="mainEntity" 
+           itemtype="https://schema.org/Question">
+        <h3 class="faq-question" [id]="'faq-question-' + i" itemprop="name">
+          <button 
+            class="faq-toggle" 
+            [attr.aria-expanded]="false" 
+            [attr.aria-controls]="'faq-answer-' + i">
+            {{faq.question}}
+            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+          </button>
+        </h3>
+        <div class="faq-answer" 
+             [id]="'faq-answer-' + i" 
+             itemscope 
+             itemprop="acceptedAnswer" 
+             itemtype="https://schema.org/Answer" 
+             hidden>
+          <p itemprop="text">{{faq.answer}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="cta-section">
+    <div class="cta-content">
+      <h2>Pronto para começar sua jornada?</h2>
+      <p>Escolha o plano que melhor se adapta às suas necessidades e comece a aprender tecnologia de forma simples e prática.</p>
+      <div class="cta-buttons">
+        <a routerLink="/registro" class="primary-btn">Criar Conta Grátis</a>
+        <a routerLink="/contato" class="secondary-btn">Fale Conosco</a>
+      </div>
+    </div>
+  </section>
+</main>

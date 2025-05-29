@@ -1,0 +1,11 @@
+main {
+  min-height: calc(100vh - 200px); /* ajuste conforme a altura do header e footer */
+  display: block;
+  width: 100%;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}

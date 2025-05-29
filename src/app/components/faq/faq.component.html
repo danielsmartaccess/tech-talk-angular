@@ -1,0 +1,65 @@
+<section class="faq-section">
+  <div class="container">
+    <header class="section-header">
+      <h1 class="section-title">Perguntas Frequentes</h1>
+      <h2 class="section-subtitle">Encontre respostas para suas dúvidas</h2>
+      <div class="title-separator" aria-hidden="true">
+        <span><i class="fas fa-question-circle"></i></span>
+      </div>
+      <p class="section-intro">
+        Aqui estão as respostas para as perguntas mais comuns sobre nossos serviços, 
+        cursos e como usar a tecnologia de forma simples em seu dia a dia.
+      </p>
+    </header>
+    
+    <nav class="faq-categories" aria-label="Categorias de FAQs">
+      <ul class="category-list">
+        <li *ngFor="let category of categories" class="category-item">
+          <button 
+            [class.active]="activeCategory === category.id"
+            (click)="changeCategory(category.id)"
+            class="category-button">
+            {{ category.name }}
+          </button>
+        </li>
+      </ul>
+    </nav>
+      <div class="faq-content">
+      <h3 class="category-heading">{{ getCategoryName() }}</h3>
+      
+      <div class="faq-list">
+        <article *ngFor="let faq of filteredFaqs" class="faq-item">
+          <h4 class="faq-question">{{ faq.question }}</h4>
+          <div class="faq-answer">
+            <p>{{ faq.answer }}</p>
+          </div>
+        </article>
+        
+        <div *ngIf="filteredFaqs.length === 0" class="faq-empty">
+          <p>Não há perguntas cadastradas para esta categoria.</p>
+        </div>
+      </div>
+    </div>
+    
+    <aside class="faq-contact">
+      <h3 class="contact-title">Não encontrou o que procurava?</h3>
+      <p class="contact-text">
+        Entre em contato com nossa equipe de suporte. Estamos prontos para ajudar!
+      </p>
+      <div class="contact-options">
+        <a href="tel:+551145678900" class="contact-option phone">
+          <i class="fas fa-phone-alt" aria-hidden="true"></i>
+          <span>(11) 4567-8900</span>
+        </a>
+        <a href="https://wa.me/5511987654321" target="_blank" rel="noopener" class="contact-option whatsapp">
+          <i class="fab fa-whatsapp" aria-hidden="true"></i>
+          <span>WhatsApp</span>
+        </a>
+        <a href="mailto:suporte@gotechtalkt.com.br" class="contact-option email">
+          <i class="fas fa-envelope" aria-hidden="true"></i>
+          <span>E-mail</span>
+        </a>
+      </div>
+    </aside>
+  </div>
+</section>

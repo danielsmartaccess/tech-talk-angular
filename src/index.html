@@ -1,16 +1,106 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <title>TechTalkAngular</title>
+  <title>Go Tech Talk | Tecnologia para a Melhor Idade de forma Simples e Intuitiva</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Fonts and icons -->
+  <meta name="description" content="A Go Tech Talk capacita pessoas 55+ a dominar tecnologias como WhatsApp, e-mail e videochamadas com aulas personalizadas, conteúdo simplificado e suporte dedicado.">
+  <meta name="keywords" content="tecnologia para idosos, cursos para melhor idade, aulas de tecnologia, aprender whatsapp, inclusão digital">
+  <meta name="author" content="Go Tech Talk">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gotechtalks.com.br/">
+  <meta property="og:title" content="Go Tech Talk | Tecnologia para a Melhor Idade">
+  <meta property="og:description" content="Aprenda tecnologia de forma simples e intuitiva. Cursos personalizados para o público 55+.">
+  <meta property="og:image" content="https://gotechtalks.com.br/assets/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Go Tech Talk">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://gotechtalks.com.br/">
+  <meta property="twitter:title" content="Go Tech Talk | Tecnologia para a Melhor Idade">
+  <meta property="twitter:description" content="Aprenda tecnologia de forma simples e intuitiva. Cursos personalizados para o público 55+.">
+  <meta property="twitter:image" content="https://gotechtalks.com.br/assets/images/twitter-image.jpg">
+  
+  <!-- Preconnect para fontes e CDNs -->
+  <!-- Preload recursos críticos -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnH1z6a2nAnwsw6lxG86sm5yp4Ib6JS0KelQb2xkPN0F+HdlNWSLM6rox96UJ6CJQ+6h4eQmA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  
+  <!-- Fontes com display=swap para melhor CLS -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  
+  <!-- Carregamento otimizado de Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnH1z6a2nAnwsw6lxG86sm5yp4Ib6JS0KelQb2xkPN0F+HdlNWSLM6rox96UJ6CJQ+6h4eQmA==" crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.media='all'">
+  
+  <!-- Fallback para navegadores sem JavaScript -->
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </noscript>
+  
+  <!-- Favicon e ícones -->
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="assets/manifest.json">
+  
+  <!-- Canonical URL padrão - será atualizada por rota -->
+  <link rel="canonical" href="https://gotechtalks.com.br/">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  
+  <!-- Schema.org / JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Go Tech Talk",
+    "url": "https://gotectalk.com.br",
+    "logo": "https://gotectalk.com.br/assets/images/go.avif",
+    "description": "Plataforma educativa para ensino de tecnologia voltada para o público da melhor idade (55+)",
+    "foundingDate": "2022",
+    "founder": {
+      "@type": "Person",
+      "name": "Prof. Daniel Steinbruch"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "São Paulo",
+      "addressRegion": "SP",
+      "addressCountry": "BR"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+55-11-XXXX-XXXX",
+      "contactType": "customer service"
+    },
+    "sameAs": [
+      "https://www.facebook.com/gotectalk",
+      "https://www.instagram.com/gotectalk",
+      "https://www.youtube.com/gotectalk"
+    ]
+  }
+  </script>
+  
+  <!-- Schema.org / JSON-LD Educational Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Go Tech Talk",
+    "alternateName": "Tecnologia para a Melhor Idade",
+    "url": "https://gotectalk.com.br",
+    "logo": "https://gotectalk.com.br/assets/images/go.avif",
+    "description": "Centro educacional especializado em ensino de tecnologia para pessoas com 55 anos ou mais.",
+    "teaches": ["Uso de WhatsApp", "E-mail", "Videochamadas", "Segurança digital", "Redes sociais"]
+  }
+  </script>
 </head>
 <body>
   <app-root></app-root>

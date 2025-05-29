@@ -10,9 +10,9 @@
       <p class="section-intro">Módulos rápidos e práticos para dominar ferramentas digitais essenciais</p>
     </header>
     
-    <div class="microlearning-grid" role="list">
+    <div class="microlearning-grid">
       <!-- Módulo 1: WhatsApp Segurança -->
-      <article class="microlearning-card" role="listitem">
+      <article class="microlearning-card">
         <header class="card-header">
           <div class="card-icon" aria-hidden="true">
             <i class="fab fa-whatsapp"></i>
@@ -29,17 +29,23 @@
             <li>Não compartilhe códigos de verificação recebidos por SMS</li>
           </ul>
         </div>
-        <a [routerLink]="['/microlearning/whatsapp-seguranca']" class="card-button">Acessar microlearning <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+        <footer>
+          <a [routerLink]="['/microlearning/whatsapp-seguranca']" class="card-button">
+            Acessar microlearning
+            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            <span class="sr-only">sobre segurança no WhatsApp</span>
+          </a>
+        </footer>
       </article>
       
       <!-- Módulo 2: WhatsApp Grupos -->
-      <div class="microlearning-card">
-        <div class="card-header">
-          <div class="card-icon">
+      <article class="microlearning-card">
+        <header class="card-header">
+          <div class="card-icon" aria-hidden="true">
             <i class="fab fa-whatsapp"></i>
           </div>
           <div class="card-badge">Intermediário</div>
-        </div>
+        </header>
         <h4 class="card-title">Como silenciar grupos barulhentos sem sair deles?</h4>
         <div class="card-content">
           <p>Mantenha a paz sem perder o contato:</p>
@@ -50,17 +56,23 @@
             <li>Organize seus grupos com etiquetas personalizadas</li>
           </ul>
         </div>
-        <a href="#" class="card-button">Acessar microlearning <i class="fas fa-arrow-right"></i></a>
-      </div>
+        <footer>
+          <a [routerLink]="['/microlearning/whatsapp-grupos']" class="card-button">
+            Acessar microlearning
+            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            <span class="sr-only">sobre silenciar grupos no WhatsApp</span>
+          </a>
+        </footer>
+      </article>
       
       <!-- Módulo 3: ChatGPT Introdução -->
-      <div class="microlearning-card featured">
-        <div class="card-header">
-          <div class="card-icon">
+      <article class="microlearning-card featured">
+        <header class="card-header">
+          <div class="card-icon" aria-hidden="true">
             <i class="fas fa-robot"></i>
           </div>
           <div class="card-badge">Destaque</div>
-        </div>
+        </header>
         <h4 class="card-title">O que é ChatGPT e como ele pode ajudar no seu dia a dia?</h4>
         <div class="card-content">
           <p>Descubra como a inteligência artificial pode facilitar sua vida:</p>
@@ -71,17 +83,23 @@
             <li>Peça sugestões de atividades para fazer com os netos</li>
           </ul>
         </div>
-        <a href="#" class="card-button">Acessar microlearning <i class="fas fa-arrow-right"></i></a>
-      </div>
+        <footer>
+          <a [routerLink]="['/microlearning/chatgpt-introducao']" class="card-button">
+            Acessar microlearning
+            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            <span class="sr-only">sobre introdução ao ChatGPT</span>
+          </a>
+        </footer>
+      </article>
       
       <!-- Módulo 4: WhatsApp Ligações -->
-      <div class="microlearning-card">
-        <div class="card-header">
-          <div class="card-icon">
+      <article class="microlearning-card">
+        <header class="card-header">
+          <div class="card-icon" aria-hidden="true">
             <i class="fab fa-whatsapp"></i>
           </div>
           <div class="card-badge">Prático</div>
-        </div>
+        </header>
         <h4 class="card-title">Como fazer videochamadas em grupo no WhatsApp?</h4>
         <div class="card-content">
           <p>Conecte-se com toda a família mesmo à distância:</p>
@@ -92,17 +110,23 @@
             <li>Dicas para economizar dados durante videochamadas</li>
           </ul>
         </div>
-        <a href="#" class="card-button">Acessar microlearning <i class="fas fa-arrow-right"></i></a>
-      </div>
+        <footer>
+          <a [routerLink]="['/microlearning/whatsapp-videochamadas']" class="card-button">
+            Acessar microlearning
+            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            <span class="sr-only">sobre videochamadas em grupo no WhatsApp</span>
+          </a>
+        </footer>
+      </article>
       
       <!-- Módulo 5: ChatGPT Avançado -->
-      <div class="microlearning-card">
-        <div class="card-header">
-          <div class="card-icon">
+      <article class="microlearning-card">
+        <header class="card-header">
+          <div class="card-icon" aria-hidden="true">
             <i class="fas fa-robot"></i>
           </div>
           <div class="card-badge">Avançado</div>
-        </div>
+        </header>
         <h4 class="card-title">Como usar o ChatGPT para planejar sua próxima viagem?</h4>
         <div class="card-content">
           <p>Planejamento de viagens sem complicação:</p>
@@ -113,13 +137,19 @@
             <li>Crie listas de bagagem personalizadas para qualquer destino</li>
           </ul>
         </div>
-        <a href="#" class="card-button">Acessar microlearning <i class="fas fa-arrow-right"></i></a>
-      </div>
+        <footer>
+          <a [routerLink]="['/microlearning/chatgpt-viagens']" class="card-button">
+            Acessar microlearning
+            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            <span class="sr-only">sobre planejamento de viagens com ChatGPT</span>
+          </a>
+        </footer>
+      </article>
     </div>
     
-    <div class="microlearning-footer">
+    <footer class="microlearning-footer">
       <p class="microlearning-note">Mais de <strong>20+ módulos Go Tech Talk disponíveis</strong> para nossos alunos</p>
-      <a href="#" class="primary-button">Ver todos os módulos</a>
-    </div>
+      <a [routerLink]="['/microlearning']" class="primary-button">Ver todos os módulos</a>
+    </footer>
   </div>
 </section>

@@ -1,9 +1,10 @@
-<div class="members-container">
-  <div class="members-header">
+<main class="members-container">
+  <header class="members-header">
     <h1 class="section-title">Membros Go Tech Talk</h1>
     <p class="section-subtitle">Nossa comunidade de aprendizado tecnológico para a melhor idade</p>
     
-    <div class="stats-cards">
+    <section class="stats-cards" aria-labelledby="stats-heading">
+      <h2 id="stats-heading" class="visually-hidden">Estatísticas da Comunidade</h2>
       <div class="stat-card">
         <div class="stat-icon">
           <i class="fas fa-users" aria-hidden="true"></i>
@@ -33,188 +34,180 @@
           <p class="stat-value">{{eventParticipantsCount}}</p>
         </div>
       </div>
-    </div>
+    </section>
     
-    <div class="filter-controls">      <div class="search-box">
+    <div class="filter-controls">
+      <div class="search-box">
+        <label for="member-search" class="visually-hidden">Buscar membros</label>
         <input 
           type="text" 
           [(ngModel)]="searchTerm" 
           (input)="applyFilters()" 
           placeholder="Buscar membros..."
           class="search-input"
+          id="member-search"
           aria-label="Buscar membros"
         />
         <i class="fas fa-search search-icon" aria-hidden="true"></i>
       </div>
       
       <div class="filter-options">
-        <label>Filtrar por: </label>
-        <div class="filter-buttons">
-          <button 
-            [class.active]="filterType === 'all'" 
-            (click)="filterType = 'all'; applyFilters()">
-            Todos
-          </button>
-          <button 
-            [class.active]="filterType === 'standard'" 
-            (click)="filterType = 'standard'; applyFilters()">
-            Padrão
-          </button>
-          <button 
-            [class.active]="filterType === 'premium'" 
-            (click)="filterType = 'premium'; applyFilters()">
-            Premium
-          </button>
-          <button 
-            [class.active]="filterType === 'vip'" 
-            (click)="filterType = 'vip'; applyFilters()">
-            VIP
-          </button>
-        </div>
-      </div>
-        <button *ngIf="searchTerm || filterType !== 'all'" (click)="clearFilters()" class="clear-filter-btn">
-        <i class="fas fa-times" aria-hidden="true"></i> Limpar Filtros
-      </button>
-    </div>
-  </div>
-  
-  <!-- Lista de Membros -->
-  <div class="members-list">    <div *ngIf="filteredMembers.length === 0" class="no-members">
-      <i class="fas fa-user-slash" aria-hidden="true" title="Nenhum resultado"></i>
-      <p>Nenhum membro encontrado com os filtros atuais. Tente ajustar sua busca.</p>
-    </div>
-      <div *ngFor="let member of filteredMembers" class="member-card" (click)="showMemberDetails(member)">
-      <div class="member-avatar" title="Foto de perfil" role="img" aria-label="Foto de perfil do membro">
-        <img [src]="member.profileImage || 'assets/images/default-profile.jpg'" 
-             [alt]="member.name"
-             [title]="'Foto de perfil de ' + member.name">
-        <div class="membership-badge" [ngClass]="getMembershipBadgeClass(member.membershipType)">
-          {{getMembershipLabel(member.membershipType)}}
-        </div>
-      </div>
-      
-      <div class="member-info">
-        <h3 class="member-name">{{member.name}}</h3>        <div class="member-contact">
-          <div class="contact-item">
-            <i class="fas fa-envelope" aria-hidden="true"></i>
-            <span>{{member.email}}</span>
-          </div>
-          <div class="contact-item">
-            <i class="fas fa-phone" aria-hidden="true"></i>
-            <span>{{member.phone}}</span>
-          </div>
-        </div>
+        <label for="filter-type">Filtrar por: </label>
+        <select 
+          id="filter-type"
+          [(ngModel)]="filterType" 
+          (change)="applyFilters()"
+          aria-label="Filtrar membros por tipo"
+        >
+          <option value="all">Todos</option>
+          <option value="standard">Padrão</option>
+          <option value="premium">Premium</option>
+          <option value="vip">VIP</option>
+        </select>
         
-        <div class="member-interests">
-          <div class="interest-tag" *ngFor="let interest of member.interests.slice(0, 3)" [ngClass]="getInterestsTagClass(interest)">
-            {{interest}}
-          </div>
-          <div class="interest-more" *ngIf="member.interests.length > 3">+{{member.interests.length - 3}}</div>
-        </div>
-          <div class="member-footer">
-          <span class="member-since">
-            <i class="fas fa-calendar-alt" aria-hidden="true"></i> Membro desde {{formatDate(member.registrationDate)}}
-          </span>
-          <button class="view-details-btn" title="Ver detalhes do membro">
-            <i class="fas fa-info-circle" aria-hidden="true"></i> Detalhes
-          </button>
-        </div>
+        <button 
+          (click)="clearFilters()" 
+          class="clear-filters-btn"
+          aria-label="Limpar todos os filtros"
+        >
+          <i class="fas fa-times" aria-hidden="true"></i> Limpar filtros
+        </button>
       </div>
     </div>
-  </div>
-    <!-- Modal de Detalhes do Membro -->
-  <div class="member-details-modal" *ngIf="selectedMember">
-    <div class="modal-overlay" (click)="closeMemberDetails()"></div>
-    <div class="modal-content" role="dialog" aria-labelledby="memberDetailsTitle">
-      <button class="close-modal" (click)="closeMemberDetails()" aria-label="Fechar detalhes" title="Fechar">
+  </header>
+
+  <section class="members-list-container" aria-live="polite">
+    <h2 class="visually-hidden">Lista de Membros</h2>
+    <p *ngIf="filteredMembers.length === 0" class="no-results">
+      Nenhum membro encontrado para os filtros aplicados.
+    </p>
+    
+    <ul class="members-list" *ngIf="filteredMembers.length > 0">
+      <li *ngFor="let member of filteredMembers" 
+          class="member-card" 
+          (click)="showMemberDetails(member)" 
+          itemscope itemtype="https://schema.org/Person">        <div class="member-avatar">
+          <img 
+            [src]="member.profileImage || 'assets/images/default-avatar.png'" 
+            [alt]="'Foto de ' + member.name"
+            loading="lazy" 
+            itemprop="image"
+            title="{{member.name}}"
+          >
+        </div>
+        <div class="member-info">
+          <h3 class="member-name" itemprop="name">{{member.name}}</h3>
+          <p class="member-since">Membro desde <time [attr.datetime]="member.registrationDate.toISOString()" itemprop="memberOf">{{formatDate(member.registrationDate)}}</time></p>
+          <span 
+            class="member-type-badge" 
+            [class]="getMembershipBadgeClass(member.membershipType)"
+            itemprop="membershipType"
+          >
+            {{getMembershipLabel(member.membershipType)}}
+          </span>
+          <div class="member-interests">
+            <span 
+              *ngFor="let interest of member.interests" 
+              class="interest-tag"
+              [class]="getInterestsTagClass(interest)"
+              itemprop="knowsAbout"
+            >
+              {{interest}}
+            </span>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Modal de detalhes do membro -->
+  <div *ngIf="selectedMember" class="member-details-modal" role="dialog" aria-modal="true" [attr.aria-labelledby]="'member-detail-title-' + selectedMember.id">
+    <div class="modal-content">
+      <button class="close-btn" (click)="closeMemberDetails()" aria-label="Fechar detalhes">
         <i class="fas fa-times" aria-hidden="true"></i>
       </button>
-        <div class="member-header">        <div class="member-avatar large" title="Foto de perfil" role="img" aria-label="Foto de perfil do membro">          <img [src]="selectedMember.profileImage || 'assets/images/default-profile.jpg'" 
-               [alt]="selectedMember.name" 
-               [title]="'Foto de perfil de ' + selectedMember.name"
-               role="img">
-        </div>
-        <div class="member-title">
-          <h2 id="memberDetailsTitle">{{selectedMember.name}}</h2>
-          <div class="membership-badge large" [ngClass]="getMembershipBadgeClass(selectedMember.membershipType)">
+      
+      <article class="member-profile" itemscope itemtype="https://schema.org/Person">
+        <header class="profile-header">          <div class="profile-avatar">
+            <img 
+              [src]="selectedMember.profileImage || 'assets/images/default-avatar.png'" 
+              [alt]="'Foto de ' + selectedMember.name"
+              itemprop="image"
+              title="{{selectedMember.name}}"
+            />
+          </div>
+          <div class="profile-titles">
+            <h2 [id]="'member-detail-title-' + selectedMember.id" itemprop="name">{{selectedMember.name}}</h2>
+          </div>
+          <span 
+            class="member-type-badge large" 
+            [class]="getMembershipBadgeClass(selectedMember.membershipType)"
+            itemprop="membershipType"
+          >
             {{getMembershipLabel(selectedMember.membershipType)}}
-          </div>
-        </div>
-      </div>
-        <div class="member-details">
-        <div class="detail-section">
-          <h3><i class="fas fa-id-card" aria-hidden="true"></i> Informações de Contato</h3>
-          <div class="detail-item">
-            <span class="detail-label">Email:</span>
-            <span class="detail-value">{{selectedMember.email}}</span>
-          </div>
-          <div class="detail-item">
-            <span class="detail-label">Telefone:</span>
-            <span class="detail-value">{{selectedMember.phone}}</span>
-          </div>
-          <div class="detail-item">
-            <span class="detail-label">Membro desde:</span>
-            <span class="detail-value">{{formatDate(selectedMember.registrationDate)}}</span>
-          </div>
-        </div>
-          <div class="detail-section">
-          <h3><i class="fas fa-star" aria-hidden="true"></i> Interesses</h3>
-          <div class="interests-container">
-            <div class="interest-tag" *ngFor="let interest of selectedMember.interests" [ngClass]="getInterestsTagClass(interest)">
-              {{interest}}
-            </div>
-          </div>
-        </div>
-          <div class="detail-section">
-          <h3><i class="fas fa-chart-line" aria-hidden="true"></i> Atividade</h3>
-          <div class="activity-stats">
-            <div class="activity-stat">
-              <span class="stat-label">Eventos participados</span>
-              <span class="stat-number">{{memberEvents.length}}</span>
-            </div>
-            <div class="activity-stat">
-              <span class="stat-label">Último acesso</span>
-              <span class="stat-text">Há 2 dias</span>
-            </div>
-          </div>
-        </div>
-          <div class="detail-section">
-          <h3><i class="fas fa-calendar-check" aria-hidden="true"></i> Eventos Inscritos</h3>
+          </span>
+        </header>
+        
+        <div class="profile-body">
+          <section class="profile-section">
+            <h3 class="section-heading">Informações de Contato</h3>
+            <ul class="contact-info-list">
+              <li>
+                <i class="fas fa-envelope" aria-hidden="true"></i>
+                <a [href]="'mailto:' + selectedMember.email" itemprop="email">{{selectedMember.email}}</a>
+              </li>
+              <li *ngIf="selectedMember.phone">
+                <i class="fas fa-phone" aria-hidden="true"></i>
+                <a [href]="'tel:' + selectedMember.phone" itemprop="telephone">{{selectedMember.phone}}</a>
+              </li>
+            </ul>
+          </section>
           
-          <div *ngIf="isLoadingEvents" class="loading-events">
-            <i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Carregando eventos...
-          </div>
+          <section class="profile-section">
+            <h3 class="section-heading">Interesses</h3>
+            <div class="member-interests large">
+              <span 
+                *ngFor="let interest of selectedMember.interests" 
+                class="interest-tag large"
+                [class]="getInterestsTagClass(interest)"
+                itemprop="knowsAbout"
+              >
+                {{interest}}
+              </span>
+            </div>
+          </section>
           
-          <div *ngIf="!isLoadingEvents && memberEvents.length === 0" class="no-events-message">
-            <i class="fas fa-calendar-times" aria-hidden="true"></i> 
-            Este membro não está inscrito em nenhum evento.
-          </div>
-          
-          <div *ngIf="!isLoadingEvents && memberEvents.length > 0" class="member-events-list">
-            <div *ngFor="let event of memberEvents" class="member-event-card">
-              <div class="event-date-badge">
-                <span class="event-day">{{event.date | date:'dd'}}</span>
-                <span class="event-month">{{event.date | date:'MMM' | uppercase}}</span>
-              </div>
-                <div class="member-event-info">
-                <h4 class="event-title">{{event.title}}</h4>
-                <div class="event-details">
-                  <span><i class="fas fa-map-marker-alt" aria-hidden="true"></i> {{event.location}}</span>
-                  <span><i class="fas fa-user-tie" aria-hidden="true"></i> {{event.instructor}}</span>
+          <section class="profile-section">
+            <h3 class="section-heading">Eventos Participados</h3>
+            <div *ngIf="isLoadingEvents" class="loading-events">
+              <p>Carregando eventos...</p>
+            </div>
+            <div *ngIf="!isLoadingEvents && memberEvents.length === 0" class="no-events">
+              <p>Este membro ainda não participou de eventos.</p>
+            </div>
+            <ul *ngIf="!isLoadingEvents && memberEvents.length > 0" class="member-events-list">
+              <li *ngFor="let event of memberEvents" class="member-event-item">
+                <div class="event-icon">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                </div>                <div class="event-details">
+                  <h4 class="event-title">{{event.title}}</h4>
+                  <p class="event-date">
+                    <time [attr.datetime]="event.date">{{event.date | date:'dd/MM/yyyy'}}</time>
+                  </p>
                 </div>
-              </div>
-            </div>
-          </div>
+              </li>
+            </ul>
+          </section>
+            <!-- Seção de biografia removida pois não existe na interface User -->
+          <section class="profile-section">
+            <h3 class="section-heading">Conta</h3>
+            <p class="member-account-info">
+              Tipo de associação: <span>{{getMembershipLabel(selectedMember.membershipType)}}</span><br>
+              Membro desde: <time [attr.datetime]="selectedMember.registrationDate.toISOString()">{{formatDate(selectedMember.registrationDate)}}</time>
+            </p>
+          </section>
         </div>
-          <div class="detail-actions">
-          <a href="mailto:{{selectedMember.email}}" class="btn-email" title="Enviar e-mail para {{selectedMember.name}}">
-            <i class="fas fa-envelope" aria-hidden="true"></i> Enviar Email
-          </a>
-          <button class="btn-contact" title="Contatar {{selectedMember.name}}">
-            <i class="fas fa-phone" aria-hidden="true"></i> Contatar
-          </button>
-        </div>
-      </div>
+      </article>
     </div>
   </div>
-</div>
+</main>

@@ -1,24 +1,29 @@
-<div class="login-container">
+<main class="login-container">
   <div class="login-card">
-    <div class="login-header">
+    <header class="login-header">
       <h1 class="login-title">Login</h1>
       <p class="login-subtitle">Acesse sua conta Go Tech Talk</p>
-    </div>
+    </header>
     
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form" novalidate aria-labelledby="login-form-heading">
+      <h2 id="login-form-heading" class="visually-hidden">Formulário de Login</h2>
+      
       <div class="form-group">
         <label for="email">Email</label>
         <div class="input-with-icon">
-          <i class="fas fa-envelope"></i>
+          <i class="fas fa-envelope" aria-hidden="true"></i>
           <input 
             type="email" 
             formControlName="email" 
             id="email" 
             placeholder="Seu endereço de email"
             [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+            autocomplete="email"
+            aria-required="true"
+            aria-describedby="email-error"
           />
         </div>
-        <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+        <div *ngIf="submitted && f['email'].errors" class="invalid-feedback" id="email-error" aria-live="polite">
           <div *ngIf="f['email'].errors['required']">Email é obrigatório</div>
           <div *ngIf="f['email'].errors['email']">Email deve ser um endereço válido</div>
         </div>
@@ -27,16 +32,19 @@
       <div class="form-group">
         <label for="password">Senha</label>
         <div class="input-with-icon">
-          <i class="fas fa-lock"></i>
+          <i class="fas fa-lock" aria-hidden="true"></i>
           <input 
             type="password" 
             formControlName="password" 
             id="password" 
             placeholder="Sua senha"
             [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+            autocomplete="current-password"
+            aria-required="true"
+            aria-describedby="password-error"
           />
         </div>
-        <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+        <div *ngIf="submitted && f['password'].errors" class="invalid-feedback" id="password-error" aria-live="polite">
           <div *ngIf="f['password'].errors['required']">Senha é obrigatória</div>
           <div *ngIf="f['password'].errors['minlength']">Senha deve ter pelo menos 6 caracteres</div>
         </div>
@@ -48,17 +56,29 @@
       </div>
       
       <div class="form-group">
-        <button [disabled]="loading" class="login-button">
-          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-          Entrar
+        <button [disabled]="loading" type="submit" class="login-button">
+          <span *ngIf="!loading">Entrar</span>
+          <span *ngIf="loading" aria-hidden="true">
+            <i class="fas fa-spinner fa-spin"></i> Processando...
+          </span>
+          <span *ngIf="loading" class="visually-hidden">Processando...</span>
         </button>
       </div>
-        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
       
-      <div class="login-help">
-        <p>Esqueceu sua senha? <a href="#">Recuperar</a></p>
-        <p>* Para fins de demonstração, utilize: admin&#64;techtalk.com / admin123</p>
+      <div *ngIf="error" class="error-message" role="alert" aria-live="assertive">
+        {{error}}
+      </div>
+      
+      <div class="form-links">
+        <a routerLink="/forgot-password" class="forgot-password-link">Esqueceu sua senha?</a>
+        <span class="divider">|</span>
+        <a routerLink="/register" class="register-link">Criar uma conta</a>
       </div>
     </form>
+    
+    <div class="login-help">
+      <p>Precisa de ajuda? <a routerLink="/help" class="help-link">Clique aqui</a> ou entre em contato pelo telefone <a href="tel:+551199999999">(11) 9999-9999</a></p>
+      <p class="accessibility-note">Esta página é totalmente acessível para usuários com deficiências visuais e motoras.</p>
+    </div>
   </div>
-</div>
+</main>

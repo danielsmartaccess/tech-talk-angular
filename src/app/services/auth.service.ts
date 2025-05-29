@@ -29,6 +29,40 @@ export class AuthService {
   public get currentUserValue(): User | null {
     return this.currentUserSubject.value;
   }
+  
+  // MÉTODO TEMPORÁRIO APENAS PARA TESTE - Simula um usuário logado
+  mockLogin(): void {
+    const mockUser: User = {
+      id: 1,
+      username: 'usuario_teste',
+      email: 'teste@gotechtalkt.com.br',
+      role: 'user'
+    };
+    
+    localStorage.setItem('currentUser', JSON.stringify({
+      user: mockUser,
+      token: 'mock-jwt-token'
+    }));
+    
+    this.currentUserSubject.next(mockUser);
+  }
+  
+  // MÉTODO TEMPORÁRIO APENAS PARA TESTE - Simula um admin logado
+  mockLoginAsAdmin(): void {
+    const mockAdmin: User = {
+      id: 2,
+      username: 'admin_teste',
+      email: 'admin@gotechtalkt.com.br',
+      role: 'admin'
+    };
+    
+    localStorage.setItem('currentUser', JSON.stringify({
+      user: mockAdmin,
+      token: 'mock-admin-jwt-token'
+    }));
+    
+    this.currentUserSubject.next(mockAdmin);
+  }
 
   login(email: string, password: string): Observable<AuthResponse> {
     if (email === 'admin@techtalk.com' && password === 'admin123') {

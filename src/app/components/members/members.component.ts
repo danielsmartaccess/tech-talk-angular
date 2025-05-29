@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { User, UserService } from '../../services/user.service';
 import { EventService, Event } from '../../services/event.service';
+import { SeoService } from '../../services/seo.service';
 
 /**
  * Componente para exibição e gerenciamento de membros
@@ -15,13 +16,13 @@ import { EventService, Event } from '../../services/event.service';
   templateUrl: './members.component.html',
   styleUrl: './members.component.scss'
 })
-export class MembersComponent implements OnInit {
+export class MembersComponent implements OnInit, OnDestroy {
   members: User[] = [];
   filteredMembers: User[] = [];
   searchTerm: string = '';
   filterType: string = 'all';
   selectedMember: User | null = null;
-    // Propriedades para as estatísticas
+  // Propriedades para as estatísticas
   totalMembers: number = 0;
   premiumMembers: number = 0;
   eventParticipants: { [key: number]: number } = {};
@@ -31,6 +32,8 @@ export class MembersComponent implements OnInit {
   memberEvents: Event[] = [];
   isLoadingEvents: boolean = false;
 
+  private seoService = inject(SeoService);
+  
   constructor(
     private userService: UserService,
     private eventService: EventService
@@ -39,6 +42,35 @@ export class MembersComponent implements OnInit {
   ngOnInit(): void {
     this.loadMembers();
     this.loadEventParticipation();
+    
+    // Configuração SEO
+    this.seoService.updateAll({
+      title: 'Membros Go Tech Talk | Nossa Comunidade de Tecnologia para a Melhor Idade',
+      description: 'Conheça os membros da comunidade Go Tech Talk dedicada a ensinar tecnologia para pessoas com mais de 55 anos de forma simples e acessível.',
+      keywords: 'membros tech talk, comunidade tecnologia melhor idade, membros 55+, tecnologia para idosos',
+      url: 'https://gotechtalks.com.br/members',
+      image: 'https://gotechtalks.com.br/assets/images/members-cover.jpg',
+      type: 'website'
+    });
+    
+    // Adiciona JSON-LD para Organization com membros
+    this.seoService.addJsonLd({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Go Tech Talk",
+      "url": "https://gotechtalks.com.br",
+      "logo": "https://gotechtalks.com.br/assets/images/logo.png",
+      "description": "Comunidade de tecnologia para pessoas com mais de 55 anos",
+      "member": {
+        "@type": "OrganizationRole",
+        "roleName": "Membro",
+        "description": "Membros da comunidade Go Tech Talk"
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.seoService.removeJsonLd();
   }
 
   /**

@@ -1,13 +1,39 @@
-<div class="blog-container">
-  <h1 class="section-title">Artigos</h1>
-  <div class="card-grid">
-    <div class="card" *ngFor="let post of posts">
-      <img [src]="post.image" [alt]="post.title" />
-      <div class="card-content">
-        <h2>{{ post.title }}</h2>
-        <p>{{ post.excerpt }}</p>
-        <a [href]="post.url" class="cta-button" target="_blank">Ler mais</a>
-      </div>
+<main class="blog-container">
+  <header>
+    <h1 class="section-title">Blog Go Tech Talk</h1>
+    <p class="blog-description">Artigos e tutoriais sobre tecnologia simplificados para o público 55+</p>
+  </header>
+
+  <section class="blog-content">
+    <div class="card-grid">
+      <article class="card" *ngFor="let post of posts" itemscope itemtype="https://schema.org/BlogPosting">
+        <div class="card-image">
+          <img [src]="post.image" 
+               [alt]="post.title" 
+               [title]="post.title"
+               loading="lazy" 
+               itemprop="image" />
+        </div>
+        <div class="card-content">
+          <h2 itemprop="headline">{{ post.title }}</h2>
+          <p itemprop="description">{{ post.excerpt }}</p>
+          <a [href]="post.url" 
+             class="cta-button" 
+             target="_blank" 
+             rel="noopener"
+             itemprop="url"
+             [attr.aria-label]="'Ler o artigo: ' + post.title">
+            Ler mais
+          </a>
+        </div>
+        <meta itemprop="publisher" content="Go Tech Talk" />
+      </article>
     </div>
-  </div>
-</div>
+  </section>
+  
+  <section class="blog-cta">
+    <h2>Receba dicas de tecnologia para a melhor idade</h2>
+    <p>Cadastre-se na nossa newsletter para receber artigos e tutoriais exclusivos</p>
+    <a href="#newsletter" class="primary-button">Inscrever-se</a>
+  </section>
+</main>
