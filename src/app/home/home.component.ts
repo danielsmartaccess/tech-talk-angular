@@ -1,13 +1,24 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { MicrolearningComponent } from '../components/microlearning/microlearning.component';
 import { CommonModule } from '@angular/common';
 import { SeoService } from '../services/seo.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MicrolearningComponent, CommonModule],
-  templateUrl: './home.component.html',
+  imports: [CommonModule],
+  template: `
+    <div style="padding: 20px; background: #f0f0f0; margin: 20px;">
+      <h1>🎉 HOME COMPONENT FUNCIONANDO!</h1>
+      <p>Se você está vendo isso, o Angular e o routing estão funcionando corretamente.</p>
+      <p>Data atual: 28 de maio de 2025</p>
+      <ul>
+        <li>✅ Angular compilando</li>
+        <li>✅ Servidor rodando na porta 4200</li>
+        <li>✅ HomeComponent carregando</li>
+        <li>✅ Routing funcionando</li>
+      </ul>
+    </div>
+  `,
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit, OnDestroy {
